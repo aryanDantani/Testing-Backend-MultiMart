@@ -1,5 +1,4 @@
 const SliderProduct = require("../models/SliderProducts");
-
 // Get all products
 const getSliderProducts = async (req, res) => {
   try {
@@ -9,5 +8,4 @@ const getSliderProducts = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch products", error });
   }
 };
-
 module.exports = { getSliderProducts };
