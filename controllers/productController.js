@@ -1,4 +1,5 @@
 const Product = require("../models/Products");
+
 // Get all products
 const getAllProducts = async (req, res) => {
   try {
@@ -8,4 +9,5 @@ const getAllProducts = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch products", error });
   }
 };
+
 module.exports = { getAllProducts };
