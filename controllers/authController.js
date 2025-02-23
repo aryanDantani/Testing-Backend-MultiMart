@@ -6,15 +6,12 @@ const { validationResult } = require("express-validator");
 exports.signup = async (req, res) => {
 
   const { username, email, password } = req.body;
-
   // Validate input
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-
   try {
-
     // Check if user exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
@@ -22,10 +19,8 @@ exports.signup = async (req, res) => {
         .status(400)
         .json({ message: "Username or Email already exists" });
     }
-
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-
     // Save user
     const newUser = new User({
       username,
@@ -33,7 +28,6 @@ exports.signup = async (req, res) => {
       password: hashedPassword,
       role: "User",
     });
-
     await newUser.save();
 
     // Generate JWT token (optional)
